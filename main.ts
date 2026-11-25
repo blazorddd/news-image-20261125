@@ -14,4 +14,6 @@ if (width > 1024 || height > 1024) throw new Error("entry.png is over 1024x1024"
 mkdirSync(outDir, { recursive: true });
 const dest = join(outDir, "entry.png");
 copyFileSync(src, dest);
+const written = readFileSync(dest);
+if (!written.equals(bytes)) throw new Error("output differs from entry.png");
 console.log(`wrote ${dest} (${bytes.length} bytes, ${width}x${height})`);
